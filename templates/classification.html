@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Cats VS Dogs</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="static/assets/css/main.css" />
+	</head>
+	<style>
+		body {
+			background-color: rgb(66, 123, 22);
+		}
+		header {
+		position: absolute;
+		top: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		}
+		form {
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		}
+		.image {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		max-height: 400px;
+    	max-width:600px;
+		}
+	
+	</style>
+
+	<!-- Header -->
+	<header>
+		<h1 style="text-align:center; color:white">WOAW!!</h1>
+		<h3 style="text-align:center; color:white">Its a beautiful {{label}}, we are sure at {{prob}} %</h3>
+	</header>
+
+	<body class="is-preload">
+		<div class="image">
+			<img src="{{url_for('send_file', filename=image_file_name)}}">
+		</div>
+
+		<a style="position: absolute; bottom:20px;" href="/" class="button">Back to Home</a>
+
+		<a href="https://xavierlince.com/" target="_blank" style="position:absolute; bottom:20px; right:20px; color:azure">Xavier Lince</a>
+
+	</body>
+
+</html>
