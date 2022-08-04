@@ -4,6 +4,8 @@ from flask import send_from_directory
 from werkzeug.utils import secure_filename
 import tensorflow as tf
 from predict_img import make_predictions
+import unidecode
+
 
 UPLOAD_FOLDER = "uploads"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
@@ -31,14 +33,18 @@ def upload_img():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            # bugg with files with accents, try to use unicode to solve that
+            filename = unidecode.unidecode(filename)
+            # save file in upload
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-            upload_image_path = os.path.join(UPLOAD_FOLDER, file.filename)
+            # and take the path to make predictions
+            upload_image_path = os.path.join(UPLOAD_FOLDER, filename)
             # make predictions
             extension_file = "." in filename and filename.rsplit(".", 1)[1].lower()
             label, prob = make_predictions(upload_image_path, extension_file)
             return render_template(
                 "classification.html",
-                image_file_name=file.filename,
+                image_file_name=filename,
                 label=label,
                 prob=prob,
             )
@@ -52,4 +58,5 @@ def send_file(filename):
 
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host="0.0.0.0", port=port)

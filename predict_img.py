@@ -17,7 +17,7 @@ def preprocess_image(image, extensions_file):
 
 def make_predictions(filepath, extensions_file):
     # load and preprocess img
-    image = image = tf.io.read_file(filepath)
+    image = tf.io.read_file(filepath)
     preprocess_img = preprocess_image(image, extensions_file)
     preprocess_img = tf.reshape(preprocess_img, [1, 224, 224, 3])
     # load model
