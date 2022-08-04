@@ -4,6 +4,9 @@
 
 ## Goals of the project
 
+- Build a __Convolutional neural network__ using TensorFlow to classify between cats and dogs. 
+- Build a Flask application containing the model to allow for __real time predictions__.
+- Deploy the application using __Docker__ and __Heroku__.
 
 
 ## Steps taken:
